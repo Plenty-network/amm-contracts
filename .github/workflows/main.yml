@@ -39,3 +39,9 @@ jobs:
       - name: Run tests [Factory Contract Setup Simulation]
         run: |
           ~/smartpy-cli/SmartPy.sh test simulations/setup.py test
+      - name: Run tests [Deploy Stable Swap Simulation]
+        run: |
+          ~/smartpy-cli/SmartPy.sh test simulations/deployStablePair.py test
+      - name: Run tests [Deploy Volatile Swap Simulation]
+        run: |
+          ~/smartpy-cli/SmartPy.sh test simulations/deployVolatilePair.py test
