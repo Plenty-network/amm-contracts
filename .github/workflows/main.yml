@@ -36,3 +36,6 @@ jobs:
       - name: Run tests [Router Contract]
         run: |
           ~/smartpy-cli/SmartPy.sh test Router.py test
+      - name: Run tests [Factory Contract Setup Simulation]
+        run: |
+          ~/smartpy-cli/SmartPy.sh test simulations/setup.py test
