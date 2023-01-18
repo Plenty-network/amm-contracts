@@ -1,0 +1,38 @@
+name: Testing Factory Contract
+
+on:
+  push:
+    branches: ["*"]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install smartpy cli
+        run: |
+          yes | bash <(curl -s https://smartpy.io/cli/install.sh)
+      - name: Run tests [LP Token Deployer]
+        run: |
+          ~/smartpy-cli/SmartPy.sh test tokenDeployer/tokenDeployer.py test
+      - name: Run tests [Volatile Swap Factory]
+        run: |
+          ~/smartpy-cli/SmartPy.sh test volatileSwapDeployer/volatileDeployer.py test    
+      - name: Run tests [Stable Swap Factory]
+        run: |
+          ~/smartpy-cli/SmartPy.sh test stableSwapDeployer/stableDeployer.py test
+      - name: Run tests [Router Contract]
+        run: |
+          ~/smartpy-cli/SmartPy.sh test Router.py test
